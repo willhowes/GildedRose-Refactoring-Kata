@@ -94,9 +94,13 @@ describe GildedRose do
         items = [@backstage_pass]
         10.times { GildedRose.new(items).update_quality() }
         expect(items[0].quality).to eq 45
-
       end
 
+      it 'decreases backstage pass quality to 0 when sell_in date passes' do
+        items = [@backstage_pass]
+        11.times { GildedRose.new(items).update_quality() }
+        expect(items[0].quality).to eq 0
+      end
     end
 
     end
