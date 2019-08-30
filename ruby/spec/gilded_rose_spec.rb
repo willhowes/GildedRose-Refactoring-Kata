@@ -78,6 +78,27 @@ describe GildedRose do
         expect(items[0].sell_in).to eq 0
       end
 
+    context 'Backstage passes' do
+
+      before(:each) do
+        @backstage_pass = Item.new('Backstage passes to a TAFKAL80ETC concert', 10, 20)
+      end
+
+      it 'increases a backstage_pass in quality by 2 when there are between 6 and 10 days left' do
+        items = [@backstage_pass]
+        5.times { GildedRose.new(items).update_quality() }
+        expect(items[0].quality).to eq 30
+      end
+
+      it 'increases a backstage_pass in quality by 3 when there are 5 days or less' do
+        items = [@backstage_pass]
+        10.times { GildedRose.new(items).update_quality() }
+        expect(items[0].quality).to eq 45
+
+      end
+
+    end
+
     end
   end
 end
